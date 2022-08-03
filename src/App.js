@@ -1,23 +1,14 @@
-import logo from './logo.svg';
+import db, {addAccount,getAccount, updateAccount, addTransaction} from './utils/db';
 import './App.css';
 
 function App() {
+  db()
+  setTimeout(()=> updateAccount(1,'faf').then(console.log),100)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <button onClick={()=>addTransaction(1,{amount:5})}>Add</button>
+      <button onClick={()=>addAccount({name:'sdn'})}>Add account</button>
+      <h3>{}</h3>
     </div>
   );
 }
