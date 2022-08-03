@@ -77,14 +77,24 @@ export function getAccountAll(){
     const transaction = db.transaction([AccountsTableName], "readwrite");
     const objectStore = transaction.objectStore(AccountsTableName);
 
-    const request = objectStore.getAllKeys();
+    const request = objectStore.openCursor();
+    let result= []
 
     return new Promise((res,rej)=>{
         request.onerror = (event) => {
             rej(new Error('error happend can get account all '))
          };
          request.onsuccess = (event) => {
-            res(request.result)
+            let cursor = event.target.result;
+            if (cursor) {
+                let key = cursor.primaryKey;
+                let value = cursor.value;
+                result.push({key, ...value});
+                cursor.continue();
+            }
+            else {
+                res(result)
+            }
         };
     })
 }

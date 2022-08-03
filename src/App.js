@@ -4,8 +4,7 @@ import './App.css';
 function App() {
   db()
   setTimeout(()=>{ 
-    getAccount(1).then(console.log)
-    getTransaction(1,1).then(console.log)
+    getAccountAll().then(console.log)
   },100)
   return (
     <div className="App">
