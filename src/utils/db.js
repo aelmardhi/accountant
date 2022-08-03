@@ -46,7 +46,6 @@ export function addAccount(account){
 export function getAccount(id){
     const transaction = db.transaction([AccountsTableName], "readwrite");
     const objectStore = transaction.objectStore(AccountsTableName);
-
     const request = objectStore.get(id);
 
     return new Promise((res,rej)=>{
@@ -55,6 +54,37 @@ export function getAccount(id){
          };
          request.onsuccess = (event) => {
             res(event.target.result)
+        };
+    })
+}
+
+export function getAccountByName(name){
+    const transaction = db.transaction([AccountsTableName], "readwrite");
+    const objectStore = transaction.objectStore(AccountsTableName).index('name');
+    const request = objectStore.get(name);
+
+    return new Promise((res,rej)=>{
+        request.onerror = (event) => {
+            rej(new Error('error happend can get account with name '+name))
+         };
+         request.onsuccess = (event) => {
+            res(event.target.result)
+        };
+    })
+}
+
+export function getAccountAll(){
+    const transaction = db.transaction([AccountsTableName], "readwrite");
+    const objectStore = transaction.objectStore(AccountsTableName);
+
+    const request = objectStore.getAllKeys();
+
+    return new Promise((res,rej)=>{
+        request.onerror = (event) => {
+            rej(new Error('error happend can get account all '))
+         };
+         request.onsuccess = (event) => {
+            res(request.result)
         };
     })
 }
@@ -122,6 +152,28 @@ export function addTransaction(accountId,transaction){
             requestUpdate.onsuccess = (event) => {
                 res(event.target.result)
             };
+        };
+    })
+}
+
+export function getTransaction(accountId,transactionId){
+    const objectStore = db.transaction([AccountsTableName], "readwrite").objectStore(AccountsTableName);
+
+    const request = objectStore.get(accountId);
+
+    return new Promise((res,rej)=>{
+        request.onerror = (event) => {
+            rej(new Error('error happend cant get account '+accountId))
+         };
+         request.onsuccess = (event) => {
+            const data = event.target.result
+            const transaction = data.transactions.find(t=> t.id == transactionId)
+            if(transaction){
+                res(transaction)
+            } else {
+                rej('error happend cant get transaction '+transactionId+' on account '+accountId)
+            }
+            
         };
     })
 }
