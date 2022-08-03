@@ -12,7 +12,7 @@ const AccountsTableName = 'accounts'
 
 const IndexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 let db;
-export default function(){
+export default function init(){
     const request = IndexedDB.open(dbName);
     request.onsuccess = (event)=>{
         db = event.target.result;
@@ -177,9 +177,95 @@ export function getTransaction(accountId,transactionId){
          };
          request.onsuccess = (event) => {
             const data = event.target.result
-            const transaction = data.transactions.find(t=> t.id == transactionId)
+            const transaction = data.transactions.find(t=> t.id === transactionId)
             if(transaction){
                 res(transaction)
+            } else {
+                rej('error happend cant get transaction '+transactionId+' on account '+accountId)
+            }
+            
+        };
+    })
+}
+
+export function getTransactions(accountId){
+    const objectStore = db.transaction([AccountsTableName], "readwrite").objectStore(AccountsTableName);
+
+    const request = objectStore.get(accountId);
+
+    return new Promise((res,rej)=>{
+        request.onerror = (event) => {
+            rej(new Error('error happend cant get account '+accountId))
+         };
+         request.onsuccess = (event) => {
+            const data = event.target.result
+            
+            res(data.transactions)
+            
+            
+        };
+    })
+}
+
+
+export function removeTransaction(accountId,transactionId){
+    const objectStore = db.transaction([AccountsTableName], "readwrite").objectStore(AccountsTableName);
+
+    const request = objectStore.get(accountId);
+
+    return new Promise((res,rej)=>{
+        request.onerror = (event) => {
+            rej(new Error('error happend cant get account '+accountId))
+         };
+         request.onsuccess = (event) => {
+            const data = event.target.result
+            const transactionIndex = data.transactions.findIndex(t=> t.id === transactionId)
+            if(transactionIndex){
+                data.transactions.splice(transactionIndex,1)
+                const requestUpdate = objectStore.put(data, accountId);
+                requestUpdate.onerror = (event) => {
+                    rej(new Error('error happend can add transaction to account '+accountId))
+                };
+                requestUpdate.onsuccess = (event) => {
+                    res(event.target.result)
+                };
+            } else {
+                rej('error happend cant get transaction '+transactionId+' on account '+accountId)
+            }
+            
+        };
+    })
+}
+
+export function updateTransaction(accountId,transactionId,amount,date,details){
+    const objectStore = db.transaction([AccountsTableName], "readwrite").objectStore(AccountsTableName);
+
+    const request = objectStore.get(accountId);
+
+    return new Promise((res,rej)=>{
+        request.onerror = (event) => {
+            rej(new Error('error happend cant get account '+accountId))
+         };
+         request.onsuccess = (event) => {
+            const data = event.target.result
+            const transactionIndex = data.transactions.findIndex(t=> t.id === transactionId)
+            if(transactionIndex){
+                if(amount){
+                    data.transactions[transactionIndex].amount = amount
+                }
+                if(date){
+                    data.transactions[transactionIndex].date = date
+                }
+                if(details){
+                    data.transactions[transactionIndex].details = details
+                }
+                const requestUpdate = objectStore.put(data, accountId);
+                requestUpdate.onerror = (event) => {
+                    rej(new Error('error happend can add transaction to account '+accountId))
+                };
+                requestUpdate.onsuccess = (event) => {
+                    res(event.target.result)
+                };
             } else {
                 rej('error happend cant get transaction '+transactionId+' on account '+accountId)
             }
