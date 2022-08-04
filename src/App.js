@@ -5,6 +5,7 @@ import './App.css';
 import Home from './pages/Home';
 import Account from './pages/Account';
 import AddAccount from './pages/AddAccount';
+import AddTransaction from './pages/AddTransaction';
 function App() {
   
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Home/>}></Route>
         <Route path='/addAccount' element={<AddAccount/>}></Route>
         <Route path='/account/:id' element={<Account/>}></Route>
+        <Route path='/account/:accountId/addTransaction' element={<AddTransaction/>}></Route>
       </Routes>
     </div>
   );
