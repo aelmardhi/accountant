@@ -1,4 +1,5 @@
 export default function PhonePanel(props){
+    console.log(props.phone)
     if(props.phone){
         return (<div>
             <h3>{props.phone}</h3>

@@ -50,7 +50,7 @@ export function getAccount(id){
 
     return new Promise((res,rej)=>{
         request.onerror = (event) => {
-            rej(new Error('error happend can get account '+id))
+            rej(new Error('error happend cant get account '+id))
          };
          request.onsuccess = (event) => {
             res(event.target.result)

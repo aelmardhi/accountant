@@ -14,6 +14,7 @@ export default function Account(props){
                 a.total = a.transactions.reduce((acc,t)=>{
                     return acc += t.amount
                 },0)
+                console.log(a)
                 setAccount(a)
             })
     },[]);
