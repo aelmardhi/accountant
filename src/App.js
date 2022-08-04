@@ -2,7 +2,8 @@ import {Route, Routes} from 'react-router-dom'
 
 import './App.css';
 
-import Home from './pages/Home/Index';
+import Home from './pages/Home';
+import Account from './pages/Account';
 
 function App() {
   
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<Home/>}></Route>
+        <Route path='/account/:id' element={<Account/>}></Route>
       </Routes>
     </div>
   );
