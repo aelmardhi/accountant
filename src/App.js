@@ -1,20 +1,16 @@
-import db, {addAccount,getAccount,getAccountByName,getAccountAll, updateAccount, addTransaction,getTransactions,removeAccount,removeTransaction,updateTransaction} from './utils/db';
+import {Route, Routes} from 'react-router-dom'
+
 import './App.css';
 
+import Home from './pages/Home/Index';
+
 function App() {
-  db()
-  setTimeout(()=>{ 
-    getAccountAll().then(console.log)
-    updateTransaction(1,1,60,'today','from me').then(console.log)
-    
-  },100)
+  
   return (
     <div className="App">
-    <button onClick={()=>addTransaction(1,{amount:5})}>Add</button>
-      <button onClick={()=>addAccount({name:'sdn'})}>Add account</button>
-      <button onClick={()=>removeAccount(2)}>remove account</button>
-      <button onClick={()=>removeTransaction(1,2)}>remove transaction</button>
-      <h3>{}</h3>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+      </Routes>
     </div>
   );
 }

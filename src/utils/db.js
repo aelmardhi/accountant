@@ -12,7 +12,7 @@ const AccountsTableName = 'accounts'
 
 const IndexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 let db;
-export default function init(){
+
     const request = IndexedDB.open(dbName);
     request.onsuccess = (event)=>{
         db = event.target.result;
@@ -25,7 +25,7 @@ export default function init(){
         const objectStore = db.createObjectStore(AccountsTableName,{autoIncrement:true});
         objectStore.createIndex("name", "name", { unique: true });
     }
-}
+
 
 export function addAccount(account){
     const transaction = db.transaction([AccountsTableName], "readwrite");
@@ -89,7 +89,7 @@ export function getAccountAll(){
             if (cursor) {
                 let key = cursor.primaryKey;
                 let value = cursor.value;
-                result.push({key, ...value});
+                result.push({id:key, ...value});
                 cursor.continue();
             }
             else {
