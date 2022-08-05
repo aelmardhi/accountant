@@ -9,6 +9,9 @@ export default function Account(props){
     const [account,setAccount] = useState({});
     const id = parseInt(useParams().id)
     useEffect(()=>{
+        refresh();
+    },[]);
+    function refresh(){
         getAccount(id)
             .then(a => {
                 a.id = id
@@ -17,18 +20,26 @@ export default function Account(props){
                 },0)
                 setAccount(a)
             })
-    },[]);
+    }
 
     return(
         <article>
             {account?.name && <div>
                 <h1>{account.name}</h1>
                 <Panel account={account}></Panel>
-                <TransactionsList transactions={account.transactions}></TransactionsList>
+                <TransactionsList refresh={refresh} accountId={id} transactions={account.transactions}></TransactionsList>
                 <div className="row">
                     <h3>total</h3>
                     <h3>{account.total}</h3>
                 </div>
+                <div>
+                <h3>
+                    <span>Total</span>
+                    <span>{account.total}</span>
+                </h3>
+                <h3>aelmardhi © 2022</h3>
+                <a href={"/account/"+id+"/addTransaction"}>New Account</a>
+            </div>
             </div>}
         </article>
     );

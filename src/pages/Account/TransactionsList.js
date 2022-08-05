@@ -11,7 +11,7 @@ export default function TransactionsList(props){
                 </tr>
             </thead>
             <tbody>
-                {props.transactions.map((t,i)=>(<TransactionsListItem key={i} transaction={t}></TransactionsListItem>))}
+                {props.transactions.map((t,i)=>(<TransactionsListItem key={i} refresh={props.refresh} accountId={props.accountId} transaction={t}></TransactionsListItem>))}
             </tbody>
         </table>
     );

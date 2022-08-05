@@ -14,7 +14,7 @@ export default function EditAccount(props){
     return (
         <article>
             {redirect && <Navigate to={redirect}></Navigate>}
-            <h1>Add Account</h1>
+            <h1>Edit Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
                 <input name="name" id="name" value={account.name} onChange={(e)=>{

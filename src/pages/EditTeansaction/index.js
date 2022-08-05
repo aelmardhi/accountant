@@ -25,7 +25,7 @@ export default function EditTransaction(props){
     return(
         <article>
             {redirect && <Navigate to={redirect}></Navigate>}
-            <h1>Add transaction</h1>
+            <h1>Edit transaction</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
                 <input name="name" id="name" value={account.name} disabled></input>
