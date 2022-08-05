@@ -10,19 +10,19 @@ export default function AddAccount(props){
             <h1>Add Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
-                <input name="name" id="name" value="" onChange={(e)=>{
+                <input name="name" id="name" value={account.name} onChange={(e)=>{
                     account.name = e.target.value;
                 }}></input>
             </fieldset>
             <fieldset>
                 <label htmlFor="phone">Phone</label>
-                <input name="phone" id="phone" type="phone" value="" onChange={(e)=>{
+                <input name="phone" id="phone" type="phone" value={account.phone} onChange={(e)=>{
                     account.phone = e.target.value;
                 }}></input>
             </fieldset>
             <fieldset>
                 <label htmlFor="details">Details</label>
-                <textarea name="details" id="details" value="" onChange={(e)=>{
+                <textarea name="details" id="details" value={account.details} onChange={(e)=>{
                     account.details = e.target.value;
                 }}></textarea>
             </fieldset>
