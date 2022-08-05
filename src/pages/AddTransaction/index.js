@@ -1,25 +1,24 @@
 import { useEffect , useState } from "react";
-import {useParams, Navigate} from "react-router-dom"
+import {useParams, useNavigate} from "react-router-dom"
 import { addTransaction, getAccount } from "../../utils/db";
 
 
 export default function AddTransaction(props){
+    const navigate = useNavigate();
     const [transaction , setTransaction] = useState({
                                                     amount :0,
                                                     details: '',
                                                 })
     const accountId = useParams().accountId
-    const [redirect ,setRedirect] = useState('');
     const [account, setAccount] = useState({name:''});
     useEffect(()=>{
         getAccount(parseInt(accountId))
             .then(a => {
                 setAccount(a)
             })
-    },[]);
+    });
     return(
         <article>
-            {redirect && <Navigate to={redirect}></Navigate>}
             <h1>New transaction</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -40,7 +39,7 @@ export default function AddTransaction(props){
             <button onClick={(e)=>{
                 transaction.date = Date();
                 addTransaction(parseInt(accountId), transaction).then(r=>{
-                    setRedirect('/account/'+accountId)
+                    navigate(-1);
                 })
             }}>Add</button>
         </article>

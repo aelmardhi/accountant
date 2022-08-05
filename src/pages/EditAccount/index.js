@@ -1,8 +1,8 @@
 import { useEffect,useState } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getAccount, updateAccount} from "../../utils/db"
 export default function EditAccount(props){
-    const [redirect ,setRedirect] = useState('');
+    const navigate = useNavigate();
     const [account,setAccount] = useState({name:'',phone:'',details:''});
     const id = parseInt(useParams().id);
     useEffect(()=>{
@@ -10,10 +10,9 @@ export default function EditAccount(props){
             .then(a => {
                 setAccount(a)
             })
-    },[]);
+    },[id]);
     return (
         <article>
-            {redirect && <Navigate to={redirect}></Navigate>}
             <h1>Edit Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -35,7 +34,7 @@ export default function EditAccount(props){
             </fieldset>
             <button onClick={(e)=>{
                 updateAccount(id,account.name,account.phone,account.details).then(r=>{
-                    setRedirect('/account/'+r)
+                    navigate(-1);
                 })
             }}>Update</button>
         </article>

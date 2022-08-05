@@ -1,16 +1,16 @@
 import { useEffect , useState } from "react";
-import {useParams, Navigate} from "react-router-dom"
+import {useParams, useNavigate} from "react-router-dom"
 import { getAccount, getTransaction, updateTransaction } from "../../utils/db";
 
 
 export default function EditTransaction(props){
+    const navigate = useNavigate()
     const [transaction , setTransaction] = useState({
                                                     amount :0,
                                                     details: '',
                                                 })
     const accountId = parseInt(useParams().accountId)
     const transactionId = parseInt(useParams().transactionId)
-    const [redirect ,setRedirect] = useState('');
     const [account, setAccount] = useState({name:''});
     useEffect(()=>{
         getAccount(accountId)
@@ -21,10 +21,9 @@ export default function EditTransaction(props){
             .then(t=>{
                 setTransaction(t);
             })
-    },[]);
+    },[accountId,transactionId]);
     return(
         <article>
-            {redirect && <Navigate to={redirect}></Navigate>}
             <h1>Edit transaction</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -45,7 +44,7 @@ export default function EditTransaction(props){
             <button onClick={(e)=>{
                 // transaction.date = Date();
                 updateTransaction(accountId, transactionId,transaction.amount,transaction.date, transaction.details).then(r=>{
-                    setRedirect('/account/'+accountId)
+                    navigate(-1)
                 })
             }}>Update</button>
         </article>

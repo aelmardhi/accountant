@@ -10,7 +10,7 @@ export default function Account(props){
     const id = parseInt(useParams().id)
     useEffect(()=>{
         refresh();
-    },[]);
+    });
     function refresh(){
         getAccount(id)
             .then(a => {

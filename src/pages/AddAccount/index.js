@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {addAccount} from "../../utils/db"
 export default function AddAccount(props){
-    const [redirect ,setRedirect] = useState('');
+    const navigate = useNavigate();
     const account = {}
     return (
         <article>
-            {redirect && <Navigate to={redirect}></Navigate>}
             <h1>New Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -28,7 +26,7 @@ export default function AddAccount(props){
             </fieldset>
             <button onClick={(e)=>{
                 addAccount(account).then(r=>{
-                    setRedirect('/account/'+r)
+                    navigate('/account/'+r,{replace:true})
                 })
             }}>Add</button>
         </article>
