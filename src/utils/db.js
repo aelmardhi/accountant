@@ -5,6 +5,7 @@
  * auto oncrement id
  * name unique
  * phone
+ * details
  * transactions { amount, details, date, }
  */
 const dbName = 'accountant'
@@ -30,7 +31,7 @@ let db;
 export function addAccount(account){
     const transaction = db.transaction([AccountsTableName], "readwrite");
     const objectStore = transaction.objectStore(AccountsTableName);
-
+    account.name = account.name.trim();
     account.transactions = []
     const request = objectStore.add(account); 
     return new Promise((res,rej)=>{
@@ -115,10 +116,10 @@ export function removeAccount(id){
     })
 }
 
-export function updateAccount(id,name,phone){
+export function updateAccount(id,name,phone,details){
     const transaction = db.transaction([AccountsTableName], "readwrite");
     const objectStore = transaction.objectStore(AccountsTableName);
-
+    name = name.trim();
     const request = objectStore.get(id);
 
     return new Promise((res,rej)=>{
@@ -129,6 +130,7 @@ export function updateAccount(id,name,phone){
             const data = event.target.result
             if(name) data.name = name
             if(phone) data.phone = phone
+            if(details) data.details = details
             const requestUpdate = objectStore.put(data, id);
             requestUpdate.onerror = (event) => {
                 rej(new Error('error happend can put account '+id))
@@ -220,7 +222,7 @@ export function removeTransaction(accountId,transactionId){
          request.onsuccess = (event) => {
             const data = event.target.result
             const transactionIndex = data.transactions.findIndex(t=> t.id === transactionId)
-            if(transactionIndex){
+            if(transactionIndex  >= 0){
                 data.transactions.splice(transactionIndex,1)
                 const requestUpdate = objectStore.put(data, accountId);
                 requestUpdate.onerror = (event) => {
@@ -249,7 +251,7 @@ export function updateTransaction(accountId,transactionId,amount,date,details){
          request.onsuccess = (event) => {
             const data = event.target.result
             const transactionIndex = data.transactions.findIndex(t=> t.id === transactionId)
-            if(transactionIndex){
+            if(transactionIndex >= 0){
                 if(amount){
                     data.transactions[transactionIndex].amount = amount
                 }

@@ -6,7 +6,7 @@ export default function AddAccount(props){
     const account = {}
     return (
         <article>
-            {redirect.length && <Navigate to={redirect}></Navigate>}
+            {redirect && <Navigate to={redirect}></Navigate>}
             <h1>Add Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
