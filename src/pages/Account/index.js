@@ -38,7 +38,7 @@ export default function Account(props){
                     <span>{account.total}</span>
                 </h3>
                 <h3>aelmardhi © 2022</h3>
-                <a href={"/account/"+id+"/addTransaction"}>New Account</a>
+                <a href={"/account/"+id+"/addTransaction"}>New Transaction</a>
             </div>
             </div>}
         </article>
