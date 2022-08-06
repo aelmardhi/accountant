@@ -1,5 +1,5 @@
-import {Route, Routes} from 'react-router-dom'
-
+import {Navigate, Route, Routes} from 'react-router-dom'
+import './utils/db'
 import './App.css';
 
 import Home from './pages/Home';
@@ -9,7 +9,6 @@ import AddTransaction from './pages/AddTransaction';
 import EditTransaction from './pages/EditTeansaction';
 import EditAccount from './pages/EditAccount';
 function App() {
-  
   return (
     <div className="App">
       <Routes>
@@ -19,6 +18,7 @@ function App() {
         <Route path='/account/:id/edit' element={<EditAccount/>}></Route>
         <Route path='/account/:accountId/addTransaction' element={<AddTransaction/>}></Route>
         <Route path='/account/:accountId/editTransaction/:transactionId' element={<EditTransaction/>}></Route>
+        <Route  path='*' element={<Navigate to="/" />}></Route>
       </Routes>
     </div>
   );
