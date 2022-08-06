@@ -72,6 +72,7 @@ a{
 .home ul
 {
   flex: 1 1 0;
+  overflow-y: auto;
 }
 .home ul li{
   position: relative;
@@ -95,10 +96,11 @@ a{
 .home ul li a span:nth-child(2){
   flex:   1 1 ;
 }
-.home h3,
-.account h3{
+.home >h3,
+.account >h3{
   background-color: var(--clr-footer);
   color: var(--clr-secondary);
+  box-shadow: 0px -5px 5px #0003;
 }
 .account p{
   padding: .25em 1em;
@@ -114,6 +116,7 @@ a{
 .panel{
   background-color: var(--clr-title);
   color: var(--clr-secondary);
+  box-shadow: 0px 5px 5px #0003;
 }
 .panel h3{
   background-color: transparent;
@@ -142,8 +145,12 @@ a{
 .panel .row .btn.trash{
   background-color: var(--clr-danger);
 }
-.account table{
+.account .table{
   flex: 1 1 0;
+  overflow-y: auto;
+}
+.account .table table{
+  width: 100%;
 }
 .account table tr td{
   text-align: center;

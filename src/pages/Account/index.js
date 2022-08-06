@@ -26,8 +26,9 @@ export default function Account(props){
             <article className="column account">
                     <h1>{account.name}</h1>
                     <Panel account={account}></Panel>
-                    <TransactionsList refresh={refresh} accountId={id} transactions={account.transactions}></TransactionsList>
-                    
+                    <div className="table">
+                        <TransactionsList refresh={refresh} accountId={id} transactions={account.transactions}></TransactionsList>
+                    </div>
                     
                     <h3 className="row total">
                         <span>Total</span>
