@@ -23,7 +23,7 @@ export default function EditTransaction(props){
             })
     },[accountId,transactionId]);
     return(
-        <article>
+        <article className="column transaction">
             <h1>Edit transaction</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -41,7 +41,7 @@ export default function EditTransaction(props){
                     setTransaction({details: e.target.value, amount: transaction.amount});
                 }}></textarea>
             </fieldset>
-            <button onClick={(e)=>{
+            <button className="btn" onClick={(e)=>{
                 // transaction.date = Date();
                 updateTransaction(accountId, transactionId,transaction.amount,transaction.date, transaction.details).then(r=>{
                     navigate(-1)

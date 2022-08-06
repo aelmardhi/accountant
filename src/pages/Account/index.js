@@ -21,26 +21,20 @@ export default function Account(props){
                 setAccount(a)
             })
     }
-
-    return(
-        <article>
-            {account?.name && <div>
-                <h1>{account.name}</h1>
-                <Panel account={account}></Panel>
-                <TransactionsList refresh={refresh} accountId={id} transactions={account.transactions}></TransactionsList>
-                <div className="row">
-                    <h3>total</h3>
-                    <h3>{account.total}</h3>
-                </div>
-                <div>
-                <h3>
-                    <span>Total</span>
-                    <span>{account.total}</span>
-                </h3>
-                <h3>aelmardhi © 2022</h3>
-                <a href={"/account/"+id+"/addTransaction"}>New Transaction</a>
-            </div>
-            </div>}
-        </article>
-    );
+    if(account?.name)
+        return(
+            <article className="column account">
+                    <h1>{account.name}</h1>
+                    <Panel account={account}></Panel>
+                    <TransactionsList refresh={refresh} accountId={id} transactions={account.transactions}></TransactionsList>
+                    
+                    
+                    <h3 className="row total">
+                        <span>Total</span>
+                        <span className="amount">{account.total}</span>
+                    </h3>
+                    <a className="btn" href={"/account/"+id+"/addTransaction"}>New Transaction</a>
+            </article>
+        );
+    return(<article className="column account"></article>)
 }

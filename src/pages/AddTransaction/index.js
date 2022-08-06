@@ -18,7 +18,7 @@ export default function AddTransaction(props){
             })
     });
     return(
-        <article>
+        <article className="column transaction">
             <h1>New transaction</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -36,7 +36,7 @@ export default function AddTransaction(props){
                     setTransaction({details: e.target.value, amount: transaction.amount});
                 }}></textarea>
             </fieldset>
-            <button onClick={(e)=>{
+            <button className="btn" onClick={(e)=>{
                 transaction.date = Date();
                 addTransaction(parseInt(accountId), transaction).then(r=>{
                     navigate(-1);

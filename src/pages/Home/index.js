@@ -21,17 +21,16 @@ export default function Home(props){
     },[])
 
     return (
-        <article>
+        <article className="home column">
             <h1>Accountant</h1>
             <AccountsList accounts={accounts}></AccountsList>
-            <div>
-                <h3>
+            
+                <h3 className="row total">
                     <span>Total</span>
-                    <span>{total}</span>
+                    <span className="amount">{total}</span>
                 </h3>
-                <h3>aelmardhi © 2022</h3>
-                <a href="/addAccount">New Account</a>
-            </div>
+                <a className="btn" href="/addAccount">New Account</a>
+            
         </article>
     );
 }

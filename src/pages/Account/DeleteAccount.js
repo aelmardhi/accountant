@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../../components/Modal"
 import { removeAccount } from "../../utils/db";
+import { TrashIcon } from "../../components/Icons";
 
 
 export default function DeleteAccount (props){
@@ -22,13 +23,13 @@ export default function DeleteAccount (props){
     return (
         <span>
             {redirect && <Navigate to={redirect}></Navigate>}
-            <button onClick={showPanel}>Delete</button>
+            <button className="btn trash" onClick={showPanel}><TrashIcon/></button>
             {panelVisible && <Modal onCancel={hidePanel}>
                 <div>
                     <h2>Are you shore to delete this account?</h2>
                     <div>
-                        <button onClick={hidePanel}>Canncel</button>
-                        <button onClick={onDelete}>Delete</button>
+                        <button className="btn" onClick={hidePanel}>Canncel</button>
+                        <button className="btn trash" onClick={onDelete}>Delete</button>
                     </div>
                 </div>
                 </Modal>}

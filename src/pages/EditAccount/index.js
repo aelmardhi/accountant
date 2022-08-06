@@ -12,7 +12,7 @@ export default function EditAccount(props){
             })
     },[id]);
     return (
-        <article>
+        <article className="column accountForm">
             <h1>Edit Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -32,7 +32,7 @@ export default function EditAccount(props){
                     setAccount({...account, details : e.target.value});
                 }}></textarea>
             </fieldset>
-            <button onClick={(e)=>{
+            <button className="btn" onClick={(e)=>{
                 updateAccount(id,account.name,account.phone,account.details).then(r=>{
                     navigate(-1);
                 })

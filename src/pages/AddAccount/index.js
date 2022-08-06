@@ -4,7 +4,7 @@ export default function AddAccount(props){
     const navigate = useNavigate();
     const account = {}
     return (
-        <article>
+        <article className="column accountForm">
             <h1>New Account</h1>
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -24,7 +24,7 @@ export default function AddAccount(props){
                     account.details = e.target.value;
                 }}></textarea>
             </fieldset>
-            <button onClick={(e)=>{
+            <button className="btn" onClick={(e)=>{
                 addAccount(account).then(r=>{
                     navigate('/account/'+r,{replace:true})
                 })
