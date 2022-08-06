@@ -1,11 +1,10 @@
 const express = require('express');
-const fs = require('fs')
 const app = express();
 
 
-app.use(express.static('./build'))
+app.use(express.static('build'))
 app.get('*',(req,res)=>{
-    fs.createReadStream('./build/index.html').pipe(res)
+    res.sendFile('./build/index.html')
 })
 
 const PORT = process.env.PORT || 3000;
