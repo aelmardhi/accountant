@@ -8,7 +8,7 @@ app.get('*',(req,res)=>{
     fs.createReadStream('./build/index.html').pipe(res)
 })
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     console.log('server started on port:'+PORT);
 })
