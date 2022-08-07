@@ -23,7 +23,7 @@ export default function DeleteTransaction (props){
             <button className="btn trash" onClick={showPanel}><TrashIcon/></button>
             {panelVisible && <Modal onCancel={hidePanel}>
                 <div>
-                    <h2>Are you shore to delete this Transaction?</h2>
+                    <h2>Are you sure to delete this Transaction?</h2>
                     <div>
                         <button className="btn" onClick={hidePanel}>Canncel</button>
                         <button className="btn trash" onClick={onDelete}>Delete</button>

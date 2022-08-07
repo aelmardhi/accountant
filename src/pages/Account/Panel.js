@@ -8,7 +8,7 @@ export default function Panel(props){
             <h3>{props.account.phone}</h3>
             <p>{props.account.details}</p>
             <div className="row">
-                <a className="btn phone" href={"dial:"+props.account.phone}><PhoneIcon/></a>
+                <a className="btn phone" href={"tel:"+props.account.phone}><PhoneIcon/></a>
                 <a className="btn whatsapp" href={"https://wa.me/"
                 +(props.account.phone[0]==='+'?
                     props.account.phone:
