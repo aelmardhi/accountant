@@ -16,6 +16,7 @@ function App() {
       setDbAvailable(d);
     })
   },[]);
+  
   if(dbAvailable)
     return (
       <div className="App">
