@@ -9,7 +9,7 @@ export default function TransactionsListItem (props){
                 props.transaction.amount > 0 ? 'positive':
                 props.transaction.amount < 0 ? 'negative':
                                                 ''
-            }>{props.transaction.amount}</td>
+            }>{Math.abs(props.transaction.amount)}</td>
             <td>{new Date(props.transaction.date).toLocaleDateString()}</td>
             <td>{props.transaction.details}</td>
             <td><Link className="btn pen" to={"/account/"+props.accountId+"/editTransaction/"+props.transaction.id}><PenIcon/></Link></td>

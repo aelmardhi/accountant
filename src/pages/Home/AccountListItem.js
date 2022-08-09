@@ -10,7 +10,7 @@ export default function AccountsListItem (props){
                     props.account.total > 0? 'positive':
                     props.account.total < 0? 'negative':
                                                 ''
-                }>{props.account.total}</span>
+                }>{Math.abs(props.account.total)}</span>
             </Link>
         </li>
     );

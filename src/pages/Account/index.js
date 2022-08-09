@@ -43,7 +43,10 @@ export default function Account(props){
                     
                     <h3 className="row total">
                         <span>{strings.total}</span>
-                        <span className="amount">{account.total}</span>
+                        <span className={'amount '+(account.total > 0 ? 'positive':
+                                                account.total < 0 ? 'negative':
+                                                '')}>
+                                                    {Math.abs(account.total)}</span>
                     </h3>
                     <Link className="btn" to={"/account/"+id+"/addTransaction"}>{strings.newTransaction}</Link>
             </article>

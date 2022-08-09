@@ -41,7 +41,11 @@ export default function Home(props){
             
                 <h3 className="row total">
                     <span>{strings.total}</span>
-                    <span className="amount">{total}</span>
+                    <span className={
+                    total > 0? 'positive':
+                    total < 0? 'negative':
+                                                ''
+                }>{Math.abs(total)}</span>
                 </h3>
                 <Link className="btn" to="/addAccount">{strings.newAccount}</Link>
             
