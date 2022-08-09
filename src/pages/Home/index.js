@@ -1,4 +1,5 @@
 import { useEffect,useState } from "react";
+import { Link } from "react-router-dom";
 import { getAccountAll } from "../../utils/db"; 
 
 import AccountsList from "./AccountsList";
@@ -29,7 +30,7 @@ export default function Home(props){
                     <span>Total</span>
                     <span className="amount">{total}</span>
                 </h3>
-                <a className="btn" href="/addAccount">New Account</a>
+                <Link className="btn" to="/addAccount">New Account</Link>
             
         </article>
     );

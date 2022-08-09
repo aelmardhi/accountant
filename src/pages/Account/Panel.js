@@ -1,5 +1,6 @@
 import { PenIcon, PhoneIcon, WhatsappIcon } from "../../components/Icons";
 import DeleteAccount from "./DeleteAccount";
+import { Link } from "react-router-dom";
 
 export default function Panel(props){
     
@@ -14,7 +15,7 @@ export default function Panel(props){
                     props.account.phone:
                     '+249'+props.account.phone)
                 }><WhatsappIcon/></a>
-                <a className="btn pen" href={"/account/"+props.account.id+"/edit"}><PenIcon></PenIcon></a>
+                <Link className="btn pen" to={"/account/"+props.account.id+"/edit"}><PenIcon></PenIcon></Link>
                 <DeleteAccount id={props.account.id}></DeleteAccount>
             </div>
         </div>)

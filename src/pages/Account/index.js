@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import { getAccount } from "../../utils/db";
 
 import Panel from "./Panel";
@@ -34,7 +34,7 @@ export default function Account(props){
                         <span>Total</span>
                         <span className="amount">{account.total}</span>
                     </h3>
-                    <a className="btn" href={"/account/"+id+"/addTransaction"}>New Transaction</a>
+                    <Link className="btn" to={"/account/"+id+"/addTransaction"}>New Transaction</Link>
             </article>
         );
     return(<article className="column account"></article>)
