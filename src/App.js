@@ -1,4 +1,5 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
+import LocalizedStrings from 'react-localization';
 import { useEffect ,useState } from 'react';
 import init from './utils/db'
 import './App.css';
@@ -16,10 +17,17 @@ function App() {
       setDbAvailable(d);
     })
   },[]);
-  
+  let strings = new LocalizedStrings({
+    en:{
+        dir: 'ltr',
+    },
+    ar:{
+      dir: 'rlt',
+    },
+});
   if(dbAvailable)
     return (
-      <div className="App">
+      <div className="App" dir={strings.dir}>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/addAccount' element={<AddAccount/>}></Route>
