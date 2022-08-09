@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
 import { getAccountAll } from "../../utils/db"; 
+import LocalizedStrings from 'react-localization';
 
 import AccountsList from "./AccountsList";
 
@@ -20,17 +21,29 @@ export default function Home(props){
                 setAccounts(a)
             })
     },[])
+    let strings = new LocalizedStrings({
+        en:{
+            accountant: 'Accountant',
+            newAccount: 'New Account',
+            total: 'Total',
+        },
+        ar:{
+            accountant: 'المحاسب',
+            newAccount: 'حساب جديد',
+            total: 'الصافي',
+        },
+    });
 
     return (
         <article className="home column">
-            <h1>Accountant</h1>
+            <h1>{strings.accountant}</h1>
             <AccountsList accounts={accounts}></AccountsList>
             
                 <h3 className="row total">
-                    <span>Total</span>
+                    <span>{strings.total}</span>
                     <span className="amount">{total}</span>
                 </h3>
-                <Link className="btn" to="/addAccount">New Account</Link>
+                <Link className="btn" to="/addAccount">{strings.newAccount}</Link>
             
         </article>
     );

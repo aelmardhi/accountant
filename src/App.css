@@ -226,7 +226,7 @@ a{
   background-color: #c4c6d0;
 }
 .amountNegative::after{
-  content: 'Credit';
+  content: attr(data-credit);
   height: 100%;
   position: absolute;
   width: 50%;
@@ -241,7 +241,7 @@ a{
 .amountNegative:checked::after{
   left: 50%;
   background-color: var(--clr-danger);
-  content: 'Debt';
+  content: attr(data-debt);
 }
 
 @media (prefers-reduced-motion: no-preference) {

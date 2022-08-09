@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import {useParams, Link} from 'react-router-dom';
 import { getAccount } from "../../utils/db";
+import LocalizedStrings from 'react-localization';
 
 import Panel from "./Panel";
 import TransactionsList from "./TransactionsList";
@@ -21,6 +22,16 @@ export default function Account(props){
                 setAccount(a)
             })
     }
+    let strings = new LocalizedStrings({
+        en:{
+            newTransaction: 'New Transaction',
+            total: 'total',
+        },
+        ar:{
+            newTransaction: 'معاملة جديدة',
+            total: 'الصافي',
+        },
+    });
     if(account?.name)
         return(
             <article className="column account">
@@ -31,10 +42,10 @@ export default function Account(props){
                     </div>
                     
                     <h3 className="row total">
-                        <span>Total</span>
+                        <span>{strings.total}</span>
                         <span className="amount">{account.total}</span>
                     </h3>
-                    <Link className="btn" to={"/account/"+id+"/addTransaction"}>New Transaction</Link>
+                    <Link className="btn" to={"/account/"+id+"/addTransaction"}>{strings.newTransaction}</Link>
             </article>
         );
     return(<article className="column account"></article>)
