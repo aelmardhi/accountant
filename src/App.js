@@ -22,7 +22,7 @@ function App() {
         dir: 'ltr',
     },
     ar:{
-      dir: 'rlt',
+      dir: 'rtl',
     },
 });
   if(dbAvailable)
