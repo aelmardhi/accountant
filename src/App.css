@@ -210,6 +210,39 @@ a{
   padding: .25em .5em;
   text-align: center;
 }
+.amountNegative{
+  margin-top: 1em;
+  width: 100%;
+  height: 2em;
+  position: relative;
+}
+.amountNegative::before{
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #c4c6d0;
+}
+.amountNegative::after{
+  content: 'Credit';
+  height: 100%;
+  position: absolute;
+  width: 50%;
+  top: 0;
+  left: 0;
+  background-color: var(--clr-title);
+  transition: all .25s ease-in-out;
+  color: var(--clr-secondary);
+  justify-items: center;
+  line-height: 2em;
+}
+.amountNegative:checked::after{
+  left: 50%;
+  background-color: var(--clr-danger);
+  content: 'Debt';
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
