@@ -42,7 +42,9 @@ export function addAccount(account){
     const transaction = db.transaction([AccountsTableName], "readwrite");
     const objectStore = transaction.objectStore(AccountsTableName);
     account.name = account.name.trim();
-    account.transactions = []
+    if(!account.transactions)
+        account.transactions = []
+    if(account.id) delete account.id
     const request = objectStore.add(account); 
     return new Promise((res,rej)=>{
         request.onerror = (event) => {
@@ -286,12 +288,30 @@ export function updateTransaction(accountId,transactionId,amount,date,details){
     })
 }
 
-
-
 export function toJsonString(){
     return new Promise(async(res,rej)=>{
-        const contacts = await getAccountAll();
-        res(JSON.stringify({contacts,time:Date()}))
+        const accounts = await getAccountAll();
+        res(JSON.stringify({accounts,time:Date()}))
     })
 }
+
+export function fromJsonString(s){
+    return new Promise(async (res, rej)=>{
+        try{
+            let j = JSON.parse(s);
+            
+            let accounts = j.accounts
+            console.log(s);
+            console.log( accounts[0].transactions);
+            for( let account of accounts){
+                await addAccount(account)
+            }
+            return res(true);
+        }catch(e){
+            rej(e);
+        }
+    })
+}
+
+
 

@@ -1,3 +1,12 @@
+/*
+elements
+special classes
+home
+account ,panel
+transaction accountForm amountNegative importContact
+settings 
+
+*/
 *,*::after,*::before{
   padding: 0;
   margin: 0;
@@ -61,6 +70,7 @@ a{
   fill: currentColor;
 }
 .home,
+.settings,
 .account,
 .transaction,
 .accountForm{
@@ -69,15 +79,18 @@ a{
   overflow: hidden;
   align-items: stretch;
 }
-.home ul
+.home ul,
+.settings ul
 {
   flex: 1 1 0;
   overflow-y: auto;
 }
-.home ul li{
+.home ul li,
+.settings ul li{
   position: relative;
 }
-.home ul li+li{
+.home ul li+li,
+.settings ul li+li{
   border-top: 1px solid var(--clr-accent1);
 }
 .home ul li a{
@@ -250,6 +263,34 @@ a{
   width: 100%;
   background-color: var(--clr-footer);
 }
+.settings input{
+  position: relative;
+}
+.settings ul li a,
+.settings ul li input{
+  color: var(--clr-accent1);
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  font-size: 1.2em;
+  padding: 0.75em 1em;
+  display: block;
+}
+.settings input::after{
+  content: attr(data-label);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--clr-secondary);
+  color: var(--clr-accent1);
+  text-align: center;
+  font-size: 1em;
+  line-height: 1em;
+  padding: 0.75em 1em;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

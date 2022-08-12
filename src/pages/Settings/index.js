@@ -1,7 +1,7 @@
 
 import { useEffect,useState } from 'react';
 import LocalizedStrings from 'react-localization';
-import { toJsonString } from '../../utils/db';
+import { fromJsonString, toJsonString } from '../../utils/db';
 
 export default function Settings(props){
     const [fileString, setFileString] = useState('');
@@ -11,8 +11,10 @@ export default function Settings(props){
             // '' + btoa(data.data.reduce((a,i)=>a+String.fromCharCode(i),''));
         })
     },[]);
-    function importFile(e){
-        
+    async function importFile(e){
+        // console.log(e.target.files[0].text());
+        fromJsonString(await e.target.files[0].text())
+            .then(console.log('file imported'))
     }
     let strings = new LocalizedStrings({
         en:{
@@ -26,11 +28,11 @@ export default function Settings(props){
         },
     });
     return (
-        <article>
+        <article className='column settings'>
             <h1>{strings.settings}</h1>
             <ul>
                 <li><a download="AccountantContacts.json" href={fileString}>{strings.exportFile}</a></li>
-                <li><input type="file" accept='application/json' onChange={importFile}></input></li>
+                <li><input type="file" accept='application/json' data-label={strings.importFile} onChange={importFile}></input></li>
             </ul>
         </article>
     )
