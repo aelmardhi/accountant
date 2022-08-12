@@ -243,6 +243,13 @@ a{
   background-color: var(--clr-danger);
   content: attr(data-debt);
 }
+.importContact{
+  width: 100%;
+}
+.importContact .btn{
+  width: 100%;
+  background-color: var(--clr-footer);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import LocalizedStrings from 'react-localization';
 import {addAccount} from "../../utils/db"
+import ImportContact from "./ImportContact";
 export default function AddAccount(props){
     const navigate = useNavigate();
     const account = {}
+    function handleImportContact(contact){
+        account.name = contact[0]?.name[0]
+        account.phone = contact[0]?.tel[0]
+    }
     let strings = new LocalizedStrings({
         en:{
             newAccount: 'New Account',
@@ -41,6 +46,7 @@ export default function AddAccount(props){
                     account.details = e.target.value;
                 }}></textarea>
             </fieldset>
+            <ImportContact handleResults={handleImportContact}></ImportContact>
             <button className="btn" onClick={(e)=>{
                 addAccount(account).then(r=>{
                     navigate('/account/'+r,{replace:true})
