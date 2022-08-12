@@ -10,6 +10,7 @@ import AddAccount from './pages/AddAccount';
 import AddTransaction from './pages/AddTransaction';
 import EditTransaction from './pages/EditTeansaction';
 import EditAccount from './pages/EditAccount';
+import Settings from './pages/Settings';
 function App() {
   const [dbAvailable, setDbAvailable] = useState(false);
   useEffect(()=>{
@@ -30,6 +31,7 @@ function App() {
       <div className="App" dir={strings.dir}>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
+          <Route path='/settings' element={<Settings/>}></Route>
           <Route path='/addAccount' element={<AddAccount/>}></Route>
           <Route path='/account/:id' element={<Account/>}></Route>
           <Route path='/account/:id/edit' element={<EditAccount/>}></Route>

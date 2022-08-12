@@ -288,3 +288,10 @@ export function updateTransaction(accountId,transactionId,amount,date,details){
 
 
 
+export function toJsonString(){
+    return new Promise(async(res,rej)=>{
+        const contacts = await getAccountAll();
+        res(JSON.stringify({contacts,time:Date()}))
+    })
+}
+
