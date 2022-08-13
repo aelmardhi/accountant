@@ -17,7 +17,7 @@ export default  function ImportContact (props){
             }
             const contacts = await navigator.contacts.select(props, opts);
             if(props.handleResults)
-                props.handleResults(contacts);
+                props.handleResults({name:contacts[0]?.name[0],tel:contacts[0]?.tel[0]});
         }catch( e){
 
         }
