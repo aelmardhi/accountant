@@ -7,15 +7,15 @@ export default  function ImportContact (props){
     async function getContacts(e){
         try {
             const supportedProperties = await navigator.contacts.getProperties();
-            let props = [];
+            let properties = [];
             const opts = {multiple: false};
             if (supportedProperties.includes('name')) {
-                props.push('name');
+                properties.push('name');
             }
             if (supportedProperties.includes('tel')) {
-            props.push('tel');
+                properties.push('tel');
             }
-            const contacts = await navigator.contacts.select(props, opts);
+            const contacts = await navigator.contacts.select(properties, opts);
             if(props.handleResults)
                 props.handleResults({name:contacts[0]?.name[0],tel:contacts[0]?.tel[0]});
         }catch( e){
