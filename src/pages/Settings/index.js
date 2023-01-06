@@ -7,7 +7,7 @@ export default function Settings(props){
     const [fileString, setFileString] = useState('');
     useEffect(()=>{
         toJsonString().then(s=>{
-            setFileString('data:image/jpeg;base64,'+btoa(s))
+            setFileString('data:text/json;base64,'+btoa(s))
             // '' + btoa(data.data.reduce((a,i)=>a+String.fromCharCode(i),''));
         })
     },[]);
