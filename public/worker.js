@@ -1,39 +1,51 @@
+// import assets from './asset-manifest.json';
 
-var cacheName = 'accountant';
+var cacheName = 'accountant-v1';
+const allCaches = [cacheName];
 
+self.importScripts([])
 
 /* Serve cached content when offline */
 self.addEventListener('fetch', function(e) {
-  e.respondWith((async ()=>{
-    let cache = await caches.open(cacheName);
-    let cacheResponse = await cache.match(e.request);
-    if(cacheResponse){
-      fetch(e.request).then(function(networkResponse){
-        cache.put(e.request,networkResponse);
-      })
-      return cacheResponse;
-    }
-    try{
-    let networkResponse = await fetch(e.request)
-      cache.put(e.request,networkResponse);
-    return networkResponse
-    }catch (e){
-     return await cache.match('error_connect.html');
-    }
-  })())
-
+  e.respondWith(
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
+    })
+  );
 });
 
-// Immediately take control of the page, see the 'Immediate Claim' recipe
-// for a detailed explanation of the implementation of the following two
-// event listeners.
 
-// self.addEventListener('install', function(event) {
-//   event.waitUntil(self.skipWaiting());
-// });
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(staticCacheName).then(function(cache) {
+      return fetch('./asset-manifest.json')
+      .then(r=>r.json())
+      .then((assets)=>{
+        return cache.addAll(assets.files);
+      })
+      
+    })
+  );
+});
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(self.clients.claim());
+});
+
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('accountant-') &&
+                 !allCaches.includes(cacheName);
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
 });
 
 // Register event listener for the 'push' event.
@@ -58,12 +70,12 @@ self.addEventListener('push', function(event) {
       // }
 
       
-      return self.registration.showNotification('Dardasha', {
-        body: payload.body,
-        title: payload.title,
-        icon:'/icons/icon144.png',
-        badge:'/icons/icon192_maskable.png',
-      });
+      // return self.registration.showNotification('Dardasha', {
+      //   body: payload.body,
+      //   title: payload.title,
+      //   icon:'/icons/icon144.png',
+      //   badge:'/icons/icon192_maskable.png',
+      // });
     })
   );
 });
